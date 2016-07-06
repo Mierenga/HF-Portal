@@ -4,7 +4,8 @@
  */
 
  var app = angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize', 'ui.bootstrap', 'ui.select',
-    'app.config', 'app.home', 'app.companies', 'app.fellows', 'app.tags', 'app.profile', 'app.votes', 'app.alert' ])
+    'app.config', 'app.home', 'app.companies', 'app.fellows', 'app.tags', 'app.profile', 'app.votes', 'app.alert', 
+    'app.register' ])
     .run(run);
 
 /**
@@ -86,7 +87,12 @@
         templateUrl: 'source/app/votes/partials/company-votes.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
+        
+    .when( '/register', {
+        controller: 'RegisterController',
+        templateUrl: 'source/app/register/register.html',
+    })
+        
     .otherwise({ redirectTo: '/' });
 
 });
@@ -182,9 +188,7 @@ function LoginModalInstanceController ($scope, $modalInstance, User) {
         password: "",
         errors: []
     };
-
     $scope.login = function(loginForm) {
-
         $scope.loginForm.errors = [];
 
         User.login(loginForm).success(function( data ){

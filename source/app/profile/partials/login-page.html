@@ -1,6 +1,7 @@
 
     <div class="modal-body hfmodal">
 
+
         <div class="alert alert-danger" role="alert" ng-show="loginForm.errors.length">
 
             <p ng-repeat="error in loginForm.errors">{{ error }}</p>
@@ -16,6 +17,10 @@
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" ng-model="loginForm.password">
+            </div>
+
+            <div class="centered">
+                <p>New User? <a href="#" ng-click="">Sign Up!</a></p>
             </div>
 
         </form>
