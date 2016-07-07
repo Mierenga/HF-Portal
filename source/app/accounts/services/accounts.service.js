@@ -19,10 +19,20 @@
         var loginModal = null;
         var registerModal = null;
 
+        return {
+            startLogin: startLogin,
+            startRegistration: startRegistration,
+            endLogin: endLogin,
+            endRegistration: endRegistration
+        };
+
         function startLogin() {
             loginModal = $modal.open({
                 templateUrl: '/source/app/accounts/partials/login.html' 
                 controller: 'LoginController'
+            });
+            loginModal.result.then(function(){
+                updateLoginStatus();
             });
         }
             
@@ -36,7 +46,7 @@
             if (loginModal !== null){
                 loginModal.close();
             }
-            registerModal = null;
+            loginModal = null;
         }
         function endRegistration() {
             if (registerModal !== null){
@@ -46,5 +56,4 @@
         }
 
     }
-
 })();

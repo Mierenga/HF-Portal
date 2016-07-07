@@ -81,18 +81,11 @@
         templateUrl: 'source/app/votes/partials/fellow-votes.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
     .when( '/votes/company', {
         controller: 'CompanyVotesController',
         templateUrl: 'source/app/votes/partials/company-votes.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
-    .when( '/register', {
-        controller: 'RegisterController',
-        templateUrl: 'source/app/register/register.html',
-    })
-
     .otherwise({ redirectTo: '/' });
 
 });
@@ -129,10 +122,10 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, CONFIG,
 app.controller('RoutingController', RoutingController)
 .controller('LoginModalInstanceController', LoginModalInstanceController);
 
-RoutingController.$inject = ['$scope', '$modal', '$window', 'User', '$location', '$anchorScroll'];
+RoutingController.$inject = ['$scope', '$modal', '$window', 'User', '$location', '$anchorScroll', 'Accounts'];
 LoginModalInstanceController.$inject = ['$scope', '$modalInstance', 'User'];
 
-function RoutingController($scope, $modal, $window, User, $location, $anchorScroll) {
+function RoutingController($scope, $modal, $window, User, $location, $anchorScroll, Accounts) {
 
     $scope.isUserLoggedIn = false;
     updateLoginStatus();
@@ -150,6 +143,8 @@ function RoutingController($scope, $modal, $window, User, $location, $anchorScro
         $scope.isUserFellow = User.isUserFellow();
         $scope.isUserCompany = User.isUserCompany();
     }
+
+    Accounts.startLogin();
 
     $scope.openModal = function() {
         var modalInstance = $modal.open({
